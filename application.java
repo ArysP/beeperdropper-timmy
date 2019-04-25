@@ -9,16 +9,15 @@ public class application implements Directions {
   
   timmy.findRoom();
   timmy.lineRoom();
-  timmy.goToOrigin();
   timmy.turnOff();
-    } // end main . . . 
+     } // end main . . . 
 
     // the following static block is executed first, so that we can setup
     // the world and other housekeeping chores.
     static {
         World.setDelay(1); // delay set to a full second . . . 
         // The name of the world you read might change as well . . .
-        World.readWorld("encircle(dificultyhigh).kwld");
+        World.readWorld("encircle.kwld");
         World.setVisible(true);
         World.showSpeedControl(true);
     } // end static . . .

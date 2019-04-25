@@ -98,6 +98,7 @@ public class BeeperDropper extends Robot {
   { zagMove();
   }
  }
+ faceWest();
  }
  
  public void  zigMove() { 
@@ -144,11 +145,12 @@ public class BeeperDropper extends Robot {
 }
  
  public void  lineRoom() {
-   while (frontIsClear()) {  
+   while (frontIsClear()){ 
 checkRight();
+     }
+   goToOrigin();
  }
- }
-
+ 
 public void checkRight() {
   if (!nextToABeeper()) {
     putBeeper();
@@ -167,16 +169,20 @@ public void checkRight() {
 
 
 public void checkLeft() {
+  if (!nextToABeeper()) {
+    putBeeper();
+  }
   turnLeft();
   if (frontIsClear()){
     move();
-    turnLeft();
   } else
-  {turnRight();
-  checkRight();
-    move();
-}
-}
+  {   turnRight();
+    safeMove();
+  } 
+  if (!nextToABeeper()) {
+  checkLeft();
+  }
+  }
 
 public void safeMove() {
   if (frontIsClear()) {
