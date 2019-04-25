@@ -1,7 +1,7 @@
 import kareltherobot.*;
 import kareltherobot.Robot;
 
-public class BeeperDropper extends UrRobot {
+public class BeeperDropper extends Robot {
 
    public BeeperDropper(int street, int avenue, Direction direction, int beepers) {
         super(street, avenue, direction, beepers);
@@ -57,39 +57,53 @@ public class BeeperDropper extends UrRobot {
   public void zigLeftUp () 
  { // Precondition: facingWest and frontIsClear
   // Postcondition: facingWest
-  move();
+    if (frontIsClear() ){ move();
+    }
+  else { putBeeper();}
   turnRight();
-  move();
-  turnLeft();
+  if (frontIsClear() ) { move();
+  }
+  else { putBeeper();
+ }
+   turnLeft();
  }
 
  public void zagDownRight() 
  { // Precondition: facingSouth and frontIsClear
   // Postcondition: facingSouth 
-  move();
+   if (frontIsClear() ) {move();
+   }
+   else { putBeeper();}
   turnLeft();
-  move();
+  if (frontIsClear() ) {move();
+  }
+   else { putBeeper();
+}
   turnRight();
  }
  
  public void findRoom() 
  { goToOrigin();
  faceWest();
- while (  ! frontIsClear() ) 
+ while (  ! nextToABeeper() ) 
  { if ( facingWest() ) 
   { zigMove();
   }
   else 
   { zagMove();
   }
+ }
+ }
  
-    public void  zigMove() { 
+ public void  zigMove() { 
  // Pre-condition: facingWest
  if ( frontIsClear() ) 
  { zigLeftUp ();
  }
  else 
  {advanceToNextDiagonal();
+ }
+ }
  
  public void  zagMove() { 
  // Pre-condition: facingSouth()
@@ -99,22 +113,39 @@ public class BeeperDropper extends UrRobot {
  else 
  { advanceToNextDiagonal();
  }
+ }
 
+ public void  turnAround() { 
+   turnLeft();
+   turnLeft();
+ }
+ 
+ 
  public void  advanceToNextDiagonal() { 
- if ( facingWest() ) 
- { faceNorth();
+   if ( facingWest() ) {
+  faceNorth();
  }
- else 
- { faceEast();
+ else { 
+   faceEast();
  }
+ if (frontIsClear() ) {
  move();
  turnAround();
+}
+ else {
+   putBeeper();
+}
  
+}
  
- 
- 
- 
- 
- 
- 
- } // end classSkeleton
+public void  lineRoom() {
+  putBeeper();
+  move();
+  putBeeper();
+  faceNorth();
+  move();
+}
+
+
+}
+ // end classSkeleton
