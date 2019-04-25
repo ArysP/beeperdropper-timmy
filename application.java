@@ -9,6 +9,7 @@ public class application implements Directions {
   
   timmy.findRoom();
   timmy.lineRoom();
+  timmy.goToOrigin();
   timmy.turnOff();
     } // end main . . . 
 

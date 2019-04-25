@@ -51,6 +51,11 @@ public class BeeperDropper extends Robot {
     faceSouth();
     goToWall();
     faceNorth();
+    faceWest();
+    goToWall();
+    faceSouth();
+    goToWall();
+    faceNorth();
 
   } // end-goToOrigin
   
@@ -138,14 +143,48 @@ public class BeeperDropper extends Robot {
  
 }
  
-public void  lineRoom() {
-  putBeeper();
-  move();
-  putBeeper();
-  faceNorth();
-  move();
+ public void  lineRoom() {
+   while (frontIsClear()) {  
+checkRight();
+ }
+ }
+
+public void checkRight() {
+  if (!nextToABeeper()) {
+    putBeeper();
+  }
+  turnRight();
+  if (frontIsClear()){
+    move();
+  } else
+  {   turnLeft();
+    safeMove();
+  } 
+  if (!nextToABeeper()) {
+  checkRight();
+  }
+  }
+
+
+public void checkLeft() {
+  turnLeft();
+  if (frontIsClear()){
+    move();
+    turnLeft();
+  } else
+  {turnRight();
+  checkRight();
+    move();
+}
 }
 
+public void safeMove() {
+  if (frontIsClear()) {
+    move();
+  } else {
+    turnLeft();
+  }
+}
 
 }
  // end classSkeleton
