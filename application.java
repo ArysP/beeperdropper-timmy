@@ -9,7 +9,6 @@ public class application implements Directions {
   
   timmy.findRoom();
   timmy.lineRoom();
-  timmy.turnOff();
      } // end main . . . 
 
     // the following static block is executed first, so that we can setup

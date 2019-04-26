@@ -59,6 +59,7 @@ public class BeeperDropper extends Robot {
 
   } // end-goToOrigin
   
+ //northwest diagonal 
   public void zigLeftUp () 
  { // Precondition: facingWest and frontIsClear
   // Postcondition: facingWest
@@ -73,6 +74,7 @@ public class BeeperDropper extends Robot {
    turnLeft();
  }
 
+ //southeast diagonal
  public void zagDownRight() 
  { // Precondition: facingSouth and frontIsClear
   // Postcondition: facingSouth 
@@ -87,6 +89,7 @@ public class BeeperDropper extends Robot {
   turnRight();
  }
  
+ //zig zag until robot finds room
  public void findRoom() 
  { goToOrigin();
  faceWest();
@@ -101,6 +104,7 @@ public class BeeperDropper extends Robot {
  faceWest();
  }
  
+ //Northwest diagonal until wall
  public void  zigMove() { 
  // Pre-condition: facingWest
  if ( frontIsClear() ) 
@@ -111,6 +115,7 @@ public class BeeperDropper extends Robot {
  }
  }
  
+ //southeast diagonal until wall
  public void  zagMove() { 
  // Pre-condition: facingSouth()
  if ( frontIsClear() ) 
@@ -126,7 +131,7 @@ public class BeeperDropper extends Robot {
    turnLeft();
  }
  
- 
+//sets robot for zig or zag 
  public void  advanceToNextDiagonal() { 
    if ( facingWest() ) {
   faceNorth();
@@ -140,57 +145,42 @@ public class BeeperDropper extends Robot {
 }
  else {
    putBeeper();
+} 
 }
  
-}
- 
+ //traces wall with beepers
  public void  lineRoom() {
-   while (frontIsClear()){ 
+   while (nextToABeeper()){ 
 checkRight();
      }
-   goToOrigin();
  }
- 
+
+//function to check for wall to the right and place beeper/return to origin if it encounters an area it has already beepered
 public void checkRight() {
-  if (!nextToABeeper()) {
-    putBeeper();
-  }
   turnRight();
   if (frontIsClear()){
     move();
   } else
-  {   turnLeft();
-    safeMove();
-  } 
-  if (!nextToABeeper()) {
-  checkRight();
+  { 
+    hugWall();
+    move();
   }
-  }
-
-
-public void checkLeft() {
-  if (!nextToABeeper()) {
+if (nextToABeeper()) {
+    goToOrigin();
+    turnOff();
+  }  
+if (!nextToABeeper()) {
     putBeeper();
   }
-  turnLeft();
-  if (frontIsClear()){
-    move();
-  } else
-  {   turnRight();
-    safeMove();
   } 
-  if (!nextToABeeper()) {
-  checkLeft();
-  }
-  }
-
-public void safeMove() {
-  if (frontIsClear()) {
-    move();
-  } else {
+  
+//function to keep the robot oriented along the wall
+public void hugWall() {
+  while (!frontIsClear()) {
     turnLeft();
   }
 }
+                    
 
 }
  // end classSkeleton
